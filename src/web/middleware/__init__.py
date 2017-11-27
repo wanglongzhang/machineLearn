@@ -5,8 +5,6 @@ from controller.baseController import api
 
 
 def api_key_required(permission, type="permission"):
-    """xcccvv"""
-    print("xxxyzyzyzy", api_key_required.__doc__)
     def deco(func):
         def func_wrapper(*args, **kwargs):
             api_key = request.headers.get("Authentication")
