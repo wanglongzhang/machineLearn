@@ -6,8 +6,13 @@ from flask_restplus import Api, Resource, fields
 
 app = Flask(__name__)
 
-api = Api(app, version="1.0", title="TodoMVC API",
-    description="A simple TodoMVC API",
+@app.route('/foo/<int:id>')
+def index(id):
+    print("id", id, "heelo", request.url_rule)
+    return request.base_url
+
+api = Api(app, version="1.0", title="configuration API",
+          description="",
 )
 
 ns = api.namespace("todos", description="TODO operations")
@@ -102,6 +107,6 @@ class Todo(Resource):
         """Update a task given its identifier"""
         return DAO.update(id, api.payload)
 
-
 if __name__ == "__main__":
+    print(app.url_map)
     app.run(debug=True)
