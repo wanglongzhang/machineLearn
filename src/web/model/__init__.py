@@ -7,17 +7,10 @@ from sqlalchemy import BigInteger, Column, DateTime, Integer, String
 from sqlalchemy.dialects.mysql.types import LONGBLOB                 
 from controller.baseController import Base, CustomizedJsonEncoder
 import json
-import datetime
-
-                                                                     
-                                                                     
 
 
-
-
-
-class App(Base):
-    __tablename__ = 'app'                                            
+class Application(Base):
+    __tablename__ = 'application'
                                                                      
     id = Column(Integer, primary_key=True)
     name = Column(String(255), nullable=False)                       

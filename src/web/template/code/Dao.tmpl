@@ -1,0 +1,10 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+from dal.BaseDao import BaseDAO
+from model import {{ model_name }}
+
+
+class {{ model_name }}DAO(BaseDAO):
+    def __init__(self):
+        super({{ model_name }}DAO, self).__init__({{ model_name }})

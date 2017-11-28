@@ -100,7 +100,17 @@ def exceptions(e):
     return "Internal Server Error", 500
 
 
-from controller.appController import ns_app
+from controller.ApplicationController import ns_application
+from controller.ConfigurationController import ns_configuration
+from controller.EnvironmentController import ns_environment
+from controller.PermissionController import ns_permission
+from controller.RoleController import  ns_role
+from controller.RolePermissionController import ns_rolepermission
+from controller.UserController import ns_user
+from controller.UserPermissionController import ns_userpermission
+from controller.UserRoleController import ns_userrole
+
+
 from controller.authController import ns_auth
 
 #api.add_namespace(ns_app)

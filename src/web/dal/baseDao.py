@@ -15,18 +15,16 @@ class BaseDAO(object):
     def get_one_entry(self, id):
         entry = self.get_query_obj().filter_by(id=id).first()
         if entry is None:
-            api.abort(404, "Todo {} doesn't exist".format(id))
-        #import pdb; pdb.set_trace()
+            api.abort(404, "{} {} doesn't exist".format(self.model_clazz, id))
         return entry
 
     def get_all_entry(self):
         return self.get_query_obj().all()
 
     def get_partial_entry(self, start, offset):
-        api.abort(404, "Todo {} doesn't exist".format(id))
+        api.abort(404, "{} {} doesn't exist".format(self.model_clazz, id))
 
     def create(self, data):
-        #import pdb; pdb.set_trace()
         new_obj = self.model_clazz()
         for each_k, each_v in data.items():
             setattr(new_obj, each_k, each_v)

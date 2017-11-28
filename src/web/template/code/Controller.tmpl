@@ -1,0 +1,59 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+from flask_restplus import Resource, fields
+from controller.baseController import api
+from middleware import api_key_required
+from dal.{{ model_name }}Dao import {{ model_name }}DAO
+
+{{ lowercase_model_name }}Model = api.model("{{ lowercase_model_name }}", {
+    "name": fields.String(required=True, description="The {{ lowercase_model_name }} name"),
+    "description": fields.String(description="The {{ lowercase_model_name }} desc"),
+    "status": fields.Integer(description="The {{ lowercase_model_name }} status")
+})
+
+{{ lowercase_model_name }}Dao = {{ model_name }}DAO()
+
+
+ns_{{ lowercase_model_name }} = api.namespace("{{ lowercase_model_name }}", description="{{ lowercase_model_name }}Controller")
+
+@ns_{{ lowercase_model_name }}.route("/")
+@api.header("Authentication", "authentication header", required=True)
+class {{ model_name }}List(Resource):
+    @api_key_required("{{ lowercase_model_name }}:readonly")
+    def get(self):
+        """List all tasks"""
+        # import pdb; pdb.set_trace()
+        return {{ lowercase_model_name }}Dao.get_all_entry()
+
+
+    @ns_{{ lowercase_model_name }}.expect({{ lowercase_model_name }}Model)
+    @api_key_required("{{ lowercase_model_name }}:readwrite")
+    def post(self):
+        """Create a new task"""
+        return {{ lowercase_model_name }}Dao.create(api.payload), 201
+
+
+@ns_{{ lowercase_model_name }}.route("/<int:id>")
+@ns_{{ lowercase_model_name }}.response(404, "{{ model_name }} not found")
+@ns_{{ lowercase_model_name }}.param("id", "The task identifier")
+@api.header("Authentication", "authentication header", required=True)
+class {{ model_name }}(Resource):
+    @api_key_required("{{ lowercase_model_name }}:readonly")
+    def get(self, id):
+        """Fetch a given resource"""
+        tmp = {{ lowercase_model_name }}Dao.get_one_entry(id)
+        return tmp
+
+    @ns_{{ lowercase_model_name }}.response(204, "{{ model_name }} deleted")
+    @api_key_required("{{ lowercase_model_name }}:readwrite")
+    def delete(self, id):
+        """Delete a task given its identifier"""
+        {{ lowercase_model_name }}Dao.delete(id)
+        return "", 204
+
+    @ns_{{ lowercase_model_name }}.expect({{ lowercase_model_name }}Model)
+    @api_key_required("{{ lowercase_model_name }}:readwrite")
+    def put(self, id):
+        """Update a task given its identifier"""
+        return {{ lowercase_model_name }}Dao.update(id, api.payload)
