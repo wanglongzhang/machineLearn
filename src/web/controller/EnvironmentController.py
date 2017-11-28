@@ -13,9 +13,8 @@ environmentModel = api.model("environment", {
 })
 
 environmentDao = EnvironmentDAO()
-
-
 ns_environment = api.namespace("environment", description="environmentController")
+
 
 @ns_environment.route("/")
 @api.header("Authentication", "authentication header", required=True)

@@ -17,6 +17,7 @@ def api_key_required(permission, type="permission"):
         return func_wrapper
     return deco
 
+
 def auth_required(func):
     def func_wrapper(*args, **kwargs):
         api_key = request.headers.get("Authorization")

@@ -3,6 +3,7 @@
 
 from controller.baseController import api, db
 import json
+import time
 
 
 class BaseDAO(object):
@@ -26,6 +27,9 @@ class BaseDAO(object):
 
     def create(self, data):
         new_obj = self.model_clazz()
+        # if hasattr(self.model_clazz, "create_time"):
+        #     data["create_time"] =
+        # import pdb; pdb.set_trace()
         for each_k, each_v in data.items():
             setattr(new_obj, each_k, each_v)
 

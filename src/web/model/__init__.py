@@ -7,6 +7,7 @@ from sqlalchemy import BigInteger, Column, DateTime, Integer, String
 from sqlalchemy.dialects.mysql.types import LONGBLOB                 
 from controller.baseController import Base, CustomizedJsonEncoder
 import json
+from datetime import datetime
 
 
 class Application(Base):
@@ -43,9 +44,9 @@ class Configuration(Base):
     app_id = Column(Integer, nullable=False)                         
     environment_id = Column(Integer, nullable=False)                 
     configuration = Column(LONGBLOB, nullable=False)                 
-    masked_configuration = Column(LONGBLOB, nullable=False)          
-    create_time = Column(DateTime)                                   
-    update_time = Column(DateTime)                                   
+    masked_configuration = Column(LONGBLOB, nullable=False)
+    create_time = Column(DateTime, default=datetime.now)
+    update_time = Column(DateTime, onupdate=datetime.now)
                                                                      
                                                                      
 class Environment(Base):                                             
@@ -55,8 +56,8 @@ class Environment(Base):
     name = Column(String(255))                                       
     description = Column(String(255))                                
     status = Column(Integer)                                         
-    create_time = Column(DateTime)                                   
-    update_time = Column(DateTime)                                   
+    create_time = Column(DateTime, default=datetime.now)
+    update_time = Column(DateTime, onupdate=datetime.now)
                                                                      
                                                                      
 class Permission(Base):                                              
@@ -92,9 +93,9 @@ class User(Base):
     username = Column(String(255), nullable=False, unique=True)      
     email = Column(String(255))                                      
     phone_number = Column(BigInteger)                                
-    password = Column(String(255))                                   
-    create_time = Column(DateTime)                                   
-    update_time = Column(DateTime)                                   
+    password = Column(String(255))
+    create_time = Column(DateTime, default=datetime.now)
+    update_time = Column(DateTime, onupdate=datetime.now)
     status = Column(Integer)                                         
                                                                      
                                                                      
@@ -111,4 +112,4 @@ class UserRole(Base):
                                                                      
     id = Column(BigInteger, primary_key=True)                        
     user_id = Column(Integer, nullable=False)                        
-    role_id = Column(Integer, nullable=False)                        
+    role_id = Column(Integer, nullable=False)
