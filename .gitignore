@@ -45,3 +45,7 @@ Temporary Items
 .idea/
 
 *.pyc
+*.pem
+*.csr
+
+*.log
