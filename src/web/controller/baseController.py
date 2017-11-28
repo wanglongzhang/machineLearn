@@ -17,7 +17,7 @@ from util.transactionLogger import new_transaction
 
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:111111@10.108.92.136:3306/service_profile"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:111111@127.0.0.1:3306/service_profile"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 
 db = SQLAlchemy(app)

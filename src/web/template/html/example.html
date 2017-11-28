@@ -1,0 +1,23 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="DataTables/DataTables-1.10.16/css/jquery.dataTables.min.css">
+</head>
+<body>
+<div ng-app="tableExample">
+    <div ng-controller="Ctrl">
+        <button ng-click="addData()">Add Data</button>
+         <h2>This table uses columns defined in controller</h2>
+        <table my-table options="options">
+        </table>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="DataTables/DataTables-1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/angular.min.js"></script>
+
+<script src="js/app.js"></script>
+
+</body>
+</html>
